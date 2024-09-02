@@ -10,6 +10,10 @@ configurations {
 }
 
 dependencies {
+    implementation libs.androidx.navigation.compose
+}
+
+dependencies {
     ktlint "com.pinterest:ktlint:$ktlint_version"
 }
 
