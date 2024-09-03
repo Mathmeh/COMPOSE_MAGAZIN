@@ -1,22 +1,45 @@
 package com.example.compose_magazin.presentation.catalogScreen
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.compose_magazin.domain.models.Product
+import com.example.compose_magazin.presentation.productCard.ProductCard
 
 @Composable
 fun CatalogScreen(navController: NavHostController) {
-    Surface(modifier = Modifier.fillMaxSize(), color = Color(0xFFF0F0F0)) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = "Catalog Screen", style = MaterialTheme.typography.bodyLarge)
+    val products = listOf(
+        Product(1, "Product 1", 19.99),
+        Product(2, "Product 2", 29.99),
+        Product(3, "Product 3", 39.99),
+        Product(4, "Product 4", 49.99),
+        Product(5, "Product 5", 59.99),
+        Product(6, "Product 6", 69.99),
+        Product(7, "Product 6", 69.99),
+        Product(8, "Product 6", 69.99),
+        Product(9, "Product 6", 69.99),
+        Product(10, "Product 6", 69.99),
+        Product(11, "Product 6", 69.99),
+        Product(12, "Product 6", 69.99),
+        Product(13, "Product 6", 69.99),
+    )
+
+    HomeScreenContent(navController = navController, products = products)
+}
+
+@Composable
+fun HomeScreenContent(
+    navController: NavHostController,
+    products: List<Product>
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 150.dp),
+    ) {
+        items(products) { product ->
+            ProductCard(product = product)
         }
     }
 }
