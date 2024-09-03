@@ -36,7 +36,9 @@ import com.example.compose_magazin.presentation.cartScreen.CartScreen
 import com.example.compose_magazin.presentation.catalogScreen.CatalogScreen
 import com.example.compose_magazin.presentation.settingsScreen.SettingsScreen
 import com.example.compose_magazin.ui.theme.ComposeMagazinTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

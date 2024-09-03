@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.compose_magazin.domain.models.Product
 import com.example.compose_magazin.presentation.productCard.ProductCard
@@ -24,21 +25,21 @@ fun CatalogScreen(navController: NavHostController) {
         Product(10, "Product 6", 69.99),
         Product(11, "Product 6", 69.99),
         Product(12, "Product 6", 69.99),
-        Product(13, "Product 6", 69.99),
+        Product(13, "Product 6", 69.99)
     )
 
-    HomeScreenContent(navController = navController, products = products)
+    HomeScreenContent(navController = navController)
 }
 
 @Composable
 fun HomeScreenContent(
     navController: NavHostController,
-    products: List<Product>
+    viewModel: CatalogScreenViewModel = hiltViewModel()
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 150.dp),
     ) {
-        items(products) { product ->
+        items(viewModel.petProductList) { product ->
             ProductCard(product = product)
         }
     }
