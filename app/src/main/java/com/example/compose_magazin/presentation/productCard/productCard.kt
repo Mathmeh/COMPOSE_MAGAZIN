@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose_magazin.domain.models.Entity.PetProduct
+import com.example.compose_magazin.domain.entity.PetProduct
 import com.example.compose_magazin.presentation.uiComponents.ChangeProductAmountButton
 
 @Composable
@@ -49,13 +49,15 @@ fun ProductCard(
                 .padding(16.dp)
                 .fillMaxHeight()
         ) {
-            Text(
-                text = product.name,
-                style = MaterialTheme.typography.bodyLarge
-            )
+            product.name?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "${product.category}$",
+                text = "${product.category?.name}",
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray,
                 fontSize = 16.sp

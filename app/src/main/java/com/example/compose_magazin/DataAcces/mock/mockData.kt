@@ -1,8 +1,8 @@
-package com.example.compose_magazin.domain.models.DataAcces.Mock
+package com.example.compose_magazin.DataAcces.mock
 
-import com.example.compose_magazin.domain.models.Entity.PetCategory
-import com.example.compose_magazin.domain.models.Entity.PetProduct
-import com.example.compose_magazin.domain.models.Entity.PetTag
+import com.example.compose_magazin.domain.entity.PetCategory
+import com.example.compose_magazin.domain.entity.PetProduct
+import com.example.compose_magazin.domain.entity.PetTag
 
 val mockCategories = listOf(
     PetCategory(

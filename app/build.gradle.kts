@@ -8,6 +8,7 @@ plugins {
     kotlin("kapt") version "2.0.0"
     alias(libs.plugins.hilt)
     alias(libs.plugins.compose.compiler)
+    kotlin("plugin.serialization") version "1.9.22"
 }
 
 android {
@@ -57,7 +58,10 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.okhttp)
+    implementation(libs.jakewharton.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
