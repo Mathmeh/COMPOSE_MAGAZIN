@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CatalogScreenViewModel @Inject constructor(
-    private val petRepository: PetRepository
+    private val petRepository: PetRepository,
 ) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(true)
@@ -34,6 +34,7 @@ class CatalogScreenViewModel @Inject constructor(
             try {
                 _isLoading.value = true
                 _isSuccesful.value = true
+                errorMess = ""
                 petProductList = petRepository.getAvailablePets()
             } catch (e: Exception) {
                 _isSuccesful.value = false

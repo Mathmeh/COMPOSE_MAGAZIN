@@ -14,10 +14,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.compose_magazin.presentation.scaffoldComponents.ScaffoldViewModel
 
 @Composable
 fun CatalogScreen(
     navController: NavHostController,
+    scaffoldViewModel: ScaffoldViewModel,
     viewModel: CatalogScreenViewModel = hiltViewModel()
 ) {
     val isLoading by viewModel.isLoading.collectAsState()
@@ -28,6 +30,7 @@ fun CatalogScreen(
     } else if (isSuccesful == true) {
         HomeScreenContent(
             navController = navController,
+            scaffoldViewModel = scaffoldViewModel,
             viewModel = viewModel
         )
     } else {
@@ -41,13 +44,17 @@ fun CatalogScreen(
 @Composable
 fun HomeScreenContent(
     navController: NavHostController,
+    scaffoldViewModel: ScaffoldViewModel,
     viewModel: CatalogScreenViewModel
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 150.dp),
     ) {
         items(viewModel.petProductList) { product ->
-            ProductCard(product = product)
+            ProductCard(
+                product = product,
+                scaffoldViewModel = scaffoldViewModel
+            )
         }
     }
 }

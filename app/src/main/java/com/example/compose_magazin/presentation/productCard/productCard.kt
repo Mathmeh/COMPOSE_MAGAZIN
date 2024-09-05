@@ -34,11 +34,13 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.compose_magazin.R
 import com.example.compose_magazin.domain.entity.PetProduct
+import com.example.compose_magazin.presentation.scaffoldComponents.ScaffoldViewModel
 import com.example.compose_magazin.presentation.uiComponents.ChangeProductAmountButton
 
 @Composable
 fun ProductCard(
     product: PetProduct,
+    scaffoldViewModel: ScaffoldViewModel,
     modifier: Modifier = Modifier
 ) {
     val productAmountState = rememberSaveable {
@@ -81,13 +83,19 @@ fun ProductCard(
             Spacer(
                 modifier = Modifier.height(8.dp)
             )
-            AddToCartButton(productAmountState)
+            AddToCartButton(
+                count = productAmountState,
+                scaffoldViewModel = scaffoldViewModel
+            )
         }
     }
 }
 
 @Composable
-fun AddToCartButton(count: MutableState<Int>) {
+fun AddToCartButton(
+    count: MutableState<Int>,
+    scaffoldViewModel: ScaffoldViewModel
+) {
     if (count.value == 0) {
         Box(
             modifier = Modifier
@@ -96,7 +104,10 @@ fun AddToCartButton(count: MutableState<Int>) {
             contentAlignment = Alignment.Center
         ) {
             Button(
-                onClick = { count.value++ },
+                onClick = {
+                    count.value++
+                    scaffoldViewModel.addItem(1)
+                },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = "add to cart")
@@ -113,7 +124,12 @@ fun AddToCartButton(count: MutableState<Int>) {
             ChangeProductAmountButton(
                 buttonText = "-",
                 size = 32.dp,
-                onClickLambda = { if (count.value > 0) count.value-- }
+                onClickLambda = {
+                    if (count.value > 0) {
+                        count.value--
+                        scaffoldViewModel.removeItem(1)
+                    }
+                }
             )
 
             Text(
@@ -125,7 +141,10 @@ fun AddToCartButton(count: MutableState<Int>) {
             ChangeProductAmountButton(
                 buttonText = "+",
                 size = 32.dp,
-                onClickLambda = { count.value++ }
+                onClickLambda = {
+                    count.value++
+                    scaffoldViewModel.addItem(1)
+                }
             )
         }
     }
