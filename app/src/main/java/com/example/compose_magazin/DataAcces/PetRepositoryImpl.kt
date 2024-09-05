@@ -10,8 +10,9 @@ import javax.inject.Singleton
 @Singleton
 class PetRepositoryImpl
 @Inject constructor() : PetRepository {
-    override suspend fun getAvaliablePets(): List<PetProduct> {
+    override suspend fun getAvailablePets(): List<PetProduct> {
         val pets = RetrofitClient.apiClient.getAllPetsByStatus("available")
+        println("aaaa1")
         return pets.map { petProductDataToPetProduct(it) }
     }
 }

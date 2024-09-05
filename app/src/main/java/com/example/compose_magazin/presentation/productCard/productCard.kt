@@ -1,5 +1,6 @@
 package com.example.compose_magazin.presentation.productCard
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -20,9 +22,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import com.example.compose_magazin.R
 import com.example.compose_magazin.domain.entity.PetProduct
 import com.example.compose_magazin.presentation.uiComponents.ChangeProductAmountButton
 
@@ -52,15 +62,21 @@ fun ProductCard(
             product.name?.let {
                 Text(
                     text = it,
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))
+
+            ProductImage(product = product)
             Text(
                 text = "${product.category?.name}",
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray,
-                fontSize = 16.sp
+                fontSize = 16.sp,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
             Spacer(
                 modifier = Modifier.height(8.dp)
@@ -112,5 +128,42 @@ fun AddToCartButton(count: MutableState<Int>) {
                 onClickLambda = { count.value++ }
             )
         }
+    }
+}
+
+@Composable
+fun ProductImage(product: PetProduct) {
+    val defaultPainter = painterResource(id = R.drawable.placeholder)
+
+    product.photoUrls?.firstOrNull()?.let { imageUrl ->
+        val painter = rememberAsyncImagePainter(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl)
+                .error(R.drawable.placeholder)
+                .placeholder(R.drawable.placeholder)
+                .build()
+        )
+
+        Image(
+            painter = painter,
+            contentDescription = product.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .padding(bottom = 8.dp),
+            contentScale = ContentScale.Crop
+        )
+    } ?: run {
+        Image(
+            painter = defaultPainter,
+            contentDescription = product.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .padding(bottom = 8.dp),
+            contentScale = ContentScale.Crop
+        )
     }
 }

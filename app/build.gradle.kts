@@ -58,6 +58,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.logging.interceptor)
+    implementation(libs.coil.compose)
     implementation(libs.okhttp)
     implementation(libs.jakewharton.retrofit2.kotlinx.serialization.converter)
     implementation(libs.retrofit2.retrofit)

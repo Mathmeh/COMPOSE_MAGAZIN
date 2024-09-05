@@ -19,7 +19,6 @@ class CatalogScreenViewModel @Inject constructor(
     val isLoading: StateFlow<Boolean> get() = _isLoading
 
     var petProductList: List<PetProduct> = listOf()
-
     init {
         fetchPets()
     }
@@ -28,7 +27,7 @@ class CatalogScreenViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 _isLoading.value = true
-                petProductList = petRepository.getAvaliablePets()
+                petProductList = petRepository.getAvailablePets()
             } catch (e: Exception) {
                 // TODO сделать экран ошибки
             } finally {
