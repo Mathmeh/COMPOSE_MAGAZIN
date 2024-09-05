@@ -1,5 +1,6 @@
 package com.example.compose_magazin.presentation.catalogScreen
 
+import ErrorScreen
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -20,12 +21,19 @@ fun CatalogScreen(
     viewModel: CatalogScreenViewModel = hiltViewModel()
 ) {
     val isLoading by viewModel.isLoading.collectAsState()
+    val isSuccesful by viewModel.isSuccesful.collectAsState()
+
     if (isLoading) {
         LoadingSpinner()
-    } else {
+    } else if (isSuccesful == true) {
         HomeScreenContent(
             navController = navController,
             viewModel = viewModel
+        )
+    } else {
+        ErrorScreen(
+            message = viewModel.errorMess,
+            onRetryClick = { viewModel.fetchPets() }
         )
     }
 }

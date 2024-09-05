@@ -8,6 +8,6 @@ data class PetProductData(
     val name: String? = "unknown",
     val category: PetCategoryData? = PetCategoryData(-1, ""),
     val tags: List<PetTagData>?,
-    val photoUrls: List<String>?,
+    val photoUrls: List<String?>?,
     val status: String?
 )

@@ -18,18 +18,26 @@ class CatalogScreenViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> get() = _isLoading
 
+    private val _isSuccesful = MutableStateFlow(true)
+    val isSuccesful: StateFlow<Boolean> get() = _isSuccesful
+
+    var errorMess: String = ""
+
     var petProductList: List<PetProduct> = listOf()
+
     init {
         fetchPets()
     }
 
-    private fun fetchPets() {
+    fun fetchPets() {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
                 petProductList = petRepository.getAvailablePets()
             } catch (e: Exception) {
-                // TODO сделать экран ошибки
+                _isSuccesful.value = false
+                errorMess = e.message.toString()
+                println("ERROR:  ${e.message}")
             } finally {
                 _isLoading.value = false
             }
