@@ -33,6 +33,7 @@ class CatalogScreenViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 _isLoading.value = true
+                _isSuccesful.value = true
                 petProductList = petRepository.getAvailablePets()
             } catch (e: Exception) {
                 _isSuccesful.value = false
