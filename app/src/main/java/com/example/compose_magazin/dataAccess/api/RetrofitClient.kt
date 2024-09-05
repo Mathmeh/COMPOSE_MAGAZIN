@@ -1,4 +1,4 @@
-package com.example.compose_magazin.DataAcces.api
+package com.example.compose_magazin.dataAccess.api
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
