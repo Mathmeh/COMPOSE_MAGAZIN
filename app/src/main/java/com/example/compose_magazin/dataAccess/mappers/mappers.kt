@@ -1,8 +1,8 @@
-package com.example.compose_magazin.DataAcces.mappers
+package com.example.compose_magazin.dataAccess.mappers
 
-import com.example.compose_magazin.DataAcces.models.PetCategoryData
-import com.example.compose_magazin.DataAcces.models.PetProductData
-import com.example.compose_magazin.DataAcces.models.PetTagData
+import com.example.compose_magazin.dataAccess.models.PetCategoryData
+import com.example.compose_magazin.dataAccess.models.PetProductData
+import com.example.compose_magazin.dataAccess.models.PetTagData
 import com.example.compose_magazin.domain.entity.PetCategory
 import com.example.compose_magazin.domain.entity.PetProduct
 import com.example.compose_magazin.domain.entity.PetTag

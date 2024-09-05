@@ -1,4 +1,4 @@
-package com.example.compose_magazin.DataAcces.mock
+package com.example.compose_magazin.dataAccess.mock
 
 import com.example.compose_magazin.domain.entity.PetCategory
 import com.example.compose_magazin.domain.entity.PetProduct
