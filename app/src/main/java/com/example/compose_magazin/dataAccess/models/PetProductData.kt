@@ -7,7 +7,7 @@ data class PetProductData(
     val id: Long,
     val name: String? = "unknown",
     val category: PetCategoryData? = PetCategoryData(-1, ""),
-    val tags: List<PetTagData>? = listOf(),
+    val tags: List<PetTagData>? = null,
     val photoUrls: List<String?>? = listOf(),
     val status: String?
 )

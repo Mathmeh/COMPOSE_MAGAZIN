@@ -38,6 +38,12 @@ fun CartScreen(
                     productCardsViewModel.removeAllProductsById(
                         productId = product.id
                     )
+                },
+                onIncrease = {
+                    productCardsViewModel.addProductAmount(id, 1)
+                },
+                onDecrease = {
+                    productCardsViewModel.removeProductAmount(id, 1)
                 }
             )
         }

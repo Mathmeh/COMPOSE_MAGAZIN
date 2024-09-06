@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -19,7 +21,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose_magazin.domain.entity.PetProduct
@@ -28,7 +33,9 @@ import com.example.compose_magazin.presentation.uiComponents.ProductImage
 @Composable
 fun CartProductItem(
     product: PetProduct,
-    onRemove: (PetProduct) -> Unit
+    onRemove: (PetProduct) -> Unit,
+    onDecrease: (Int) -> Unit,
+    onIncrease: (Int) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -46,14 +53,19 @@ fun CartProductItem(
                 modifier = Modifier
                     .width(64.dp)
                     .height(64.dp)
+                    .align(Alignment.CenterVertically)
             ) {
                 ProductImage(
                     product = product,
                     imgSize = 64
                 )
             }
+            Spacer(modifier = Modifier.width(8.dp))
 
-            Column {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
                 Text(
                     text = "Name: ${product.name}",
                     fontSize = 18.sp,
@@ -64,12 +76,52 @@ fun CartProductItem(
                     fontSize = 14.sp,
                     style = MaterialTheme.typography.labelSmall
                 )
+                Text(
+                    text = "${product.category?.name}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.Gray,
+                    fontSize = 16.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .padding(4.dp)
+                )
             }
 
-            Spacer(modifier = Modifier.width(16.dp))
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                //                Text(
+//                    text = quantity.toString(),
+//                    style = MaterialTheme.typography.bodyLarge,
+//                    modifier = Modifier.padding(horizontal = 8.dp)
+//                )
+
+                IconButton(
+                    onClick = { onIncrease }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Increase",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+                IconButton(
+                    onClick = { onDecrease }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Remove,
+                        contentDescription = "Decrease",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+            }
+
+//            Spacer(modifier = Modifier.width(8.dp))
 
             IconButton(
-                onClick = { onRemove(product) }
+                onClick = { onRemove(product) },
+                modifier = Modifier.align(Alignment.CenterVertically)
             ) {
                 Icon(
                     imageVector = Icons.Default.Delete,
