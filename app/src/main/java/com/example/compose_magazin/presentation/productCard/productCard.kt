@@ -17,9 +17,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,13 +37,10 @@ import com.example.compose_magazin.presentation.uiComponents.ChangeProductAmount
 @Composable
 fun ProductCard(
     product: PetProduct,
+    productCardsViewModel: ProductCardsViewModel,
     scaffoldViewModel: ScaffoldViewModel,
     modifier: Modifier = Modifier
 ) {
-    val productAmountState = rememberSaveable {
-        mutableStateOf(0)
-    }
-
     Card(
         colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -84,8 +78,9 @@ fun ProductCard(
                 modifier = Modifier.height(8.dp)
             )
             AddToCartButton(
-                count = productAmountState,
-                scaffoldViewModel = scaffoldViewModel
+                scaffoldViewModel = scaffoldViewModel,
+                productCardsViewModel = productCardsViewModel,
+                productId = product.id
             )
         }
     }
@@ -93,10 +88,14 @@ fun ProductCard(
 
 @Composable
 fun AddToCartButton(
-    count: MutableState<Int>,
-    scaffoldViewModel: ScaffoldViewModel
+    scaffoldViewModel: ScaffoldViewModel,
+    productCardsViewModel: ProductCardsViewModel,
+    productId: Long
 ) {
-    if (count.value == 0) {
+    if (
+        productCardsViewModel.getProductAmountById(productId) == 0 ||
+        productCardsViewModel.getProductAmountById(productId) == null
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -105,7 +104,10 @@ fun AddToCartButton(
         ) {
             Button(
                 onClick = {
-                    count.value++
+                    productCardsViewModel.addProductAmount(
+                        productId = productId,
+                        changeAmountValue = 1
+                    )
                     scaffoldViewModel.addItem(1)
                 },
                 modifier = Modifier.fillMaxWidth()
@@ -113,7 +115,7 @@ fun AddToCartButton(
                 Text(text = "add to cart")
             }
         }
-    } else {
+    } else if (productCardsViewModel.getProductAmountById(productId)!! > 0) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly,
@@ -121,31 +123,27 @@ fun AddToCartButton(
                 .fillMaxWidth()
                 .height(32.dp)
         ) {
-            ChangeProductAmountButton(
-                buttonText = "-",
-                size = 32.dp,
-                onClickLambda = {
-                    if (count.value > 0) {
-                        count.value--
-                        scaffoldViewModel.removeItem(1)
-                    }
-                }
-            )
+            ChangeProductAmountButton(buttonText = "-", size = 32.dp, onClickLambda = {
+                productCardsViewModel.removeProductAmount(
+                    productId = productId,
+                    changeAmountValue = 1
+                )
+                scaffoldViewModel.removeItem(1)
+            })
 
             Text(
-                text = count.value.toString(),
+                text = productCardsViewModel.getProductAmountById(productId).toString(),
                 fontSize = 32.sp,
                 modifier = Modifier.fillMaxHeight()
             )
 
-            ChangeProductAmountButton(
-                buttonText = "+",
-                size = 32.dp,
-                onClickLambda = {
-                    count.value++
-                    scaffoldViewModel.addItem(1)
-                }
-            )
+            ChangeProductAmountButton(buttonText = "+", size = 32.dp, onClickLambda = {
+                productCardsViewModel.addProductAmount(
+                    productId = productId,
+                    changeAmountValue = 1
+                )
+                scaffoldViewModel.addItem(1)
+            })
         }
     }
 }
@@ -156,11 +154,8 @@ fun ProductImage(product: PetProduct) {
 
     product.photoUrls?.firstOrNull()?.let { imageUrl ->
         val painter = rememberAsyncImagePainter(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(imageUrl)
-                .error(R.drawable.placeholder)
-                .placeholder(R.drawable.placeholder)
-                .build()
+            model = ImageRequest.Builder(LocalContext.current).data(imageUrl)
+                .error(R.drawable.placeholder).placeholder(R.drawable.placeholder).build()
         )
 
         Image(

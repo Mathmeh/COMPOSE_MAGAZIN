@@ -14,29 +14,32 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.compose_magazin.presentation.productCard.ProductCardsViewModel
 import com.example.compose_magazin.presentation.scaffoldComponents.ScaffoldViewModel
 
 @Composable
 fun CatalogScreen(
     navController: NavHostController,
     scaffoldViewModel: ScaffoldViewModel,
-    viewModel: CatalogScreenViewModel = hiltViewModel()
+    catalogScreenViewModel: CatalogScreenViewModel = hiltViewModel(),
+    productCardsViewModel: ProductCardsViewModel = hiltViewModel()
 ) {
-    val isLoading by viewModel.isLoading.collectAsState()
-    val isSuccesful by viewModel.isSuccesful.collectAsState()
+    val isLoading by catalogScreenViewModel.isLoading.collectAsState()
+    val isSuccessful by catalogScreenViewModel.isSuccesful.collectAsState()
 
     if (isLoading) {
         LoadingSpinner()
-    } else if (isSuccesful == true) {
+    } else if (isSuccessful) {
         HomeScreenContent(
             navController = navController,
             scaffoldViewModel = scaffoldViewModel,
-            viewModel = viewModel
+            catalogScreenViewModel = catalogScreenViewModel,
+            productCardsViewModel = productCardsViewModel
         )
     } else {
         ErrorScreen(
-            message = viewModel.errorMess,
-            onRetryClick = { viewModel.fetchPets() }
+            message = catalogScreenViewModel.errorMess,
+            onRetryClick = { catalogScreenViewModel.fetchPets() }
         )
     }
 }
@@ -45,15 +48,18 @@ fun CatalogScreen(
 fun HomeScreenContent(
     navController: NavHostController,
     scaffoldViewModel: ScaffoldViewModel,
-    viewModel: CatalogScreenViewModel
+    catalogScreenViewModel: CatalogScreenViewModel,
+    productCardsViewModel: ProductCardsViewModel
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 150.dp),
     ) {
-        items(viewModel.petProductList) { product ->
+        items(catalogScreenViewModel.petProductList) { product ->
+
             ProductCard(
                 product = product,
-                scaffoldViewModel = scaffoldViewModel
+                scaffoldViewModel = scaffoldViewModel,
+                productCardsViewModel = productCardsViewModel
             )
         }
     }

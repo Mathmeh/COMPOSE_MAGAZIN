@@ -30,7 +30,7 @@ import com.example.compose_magazin.presentation.uiComponents.CartBadgedBox
 @Composable
 fun NavigationComponent(
     navController: NavHostController,
-    scaffoldViewModel: ScaffoldViewModel,
+    scaffoldViewModel: ScaffoldViewModel
 ) {
     NavHost(navController = navController, startDestination = "catalog") {
         composable("catalog") {
