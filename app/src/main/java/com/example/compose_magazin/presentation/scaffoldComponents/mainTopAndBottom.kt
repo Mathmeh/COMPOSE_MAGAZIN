@@ -88,17 +88,6 @@ fun NavigationBar(
     }
 }
 
-@Composable
-fun BadgeBox(
-    badgeContent: @Composable () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    BadgeBox(
-        badgeContent = badgeContent,
-        modifier = modifier
-    )
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar() {
