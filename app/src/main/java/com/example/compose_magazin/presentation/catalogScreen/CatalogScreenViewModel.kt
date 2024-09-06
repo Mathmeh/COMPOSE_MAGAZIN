@@ -29,6 +29,17 @@ class CatalogScreenViewModel @Inject constructor(
         fetchPets()
     }
 
+    fun getPetById(id: Long): PetProduct {
+        return petProductList.find { it.id == id } ?: PetProduct(
+            id = -1,
+            name = null,
+            category = null,
+            tags = null,
+            photoUrls = null,
+            status = null
+        )
+    }
+
     fun fetchPets() {
         viewModelScope.launch {
             try {

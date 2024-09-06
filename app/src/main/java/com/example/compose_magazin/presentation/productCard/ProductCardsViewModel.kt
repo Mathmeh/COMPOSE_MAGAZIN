@@ -23,12 +23,20 @@ class ProductCardsViewModel @Inject constructor() : ViewModel() {
 
     fun removeProductAmount(productId: Long, changeAmountValue: Int) {
         _productAmounts[productId]?.let {
-            if (it > 0) {
-                _productAmounts[productId] = _productAmounts[productId]!! - 1
+            if (it > 0 && it > changeAmountValue) {
+                _productAmounts[productId] = _productAmounts[productId]!! - changeAmountValue
             }
         }
+        if (_productAmounts[productId] == 0) {
+            _productAmounts.remove(productId)
+        }
     }
+
     fun getProductAmountById(productId: Long): Int? {
         return productAmounts[productId]
+    }
+
+    fun removeAllProductsById(productId: Long) {
+        _productAmounts.remove(productId)
     }
 }

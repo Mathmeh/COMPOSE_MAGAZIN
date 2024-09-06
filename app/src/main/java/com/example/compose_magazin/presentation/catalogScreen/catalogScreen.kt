@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.compose_magazin.presentation.productCard.ProductCard
 import androidx.compose.foundation.layout.*
@@ -21,8 +20,8 @@ import com.example.compose_magazin.presentation.scaffoldComponents.ScaffoldViewM
 fun CatalogScreen(
     navController: NavHostController,
     scaffoldViewModel: ScaffoldViewModel,
-    catalogScreenViewModel: CatalogScreenViewModel = hiltViewModel(),
-    productCardsViewModel: ProductCardsViewModel = hiltViewModel()
+    catalogScreenViewModel: CatalogScreenViewModel,
+    productCardsViewModel: ProductCardsViewModel
 ) {
     val isLoading by catalogScreenViewModel.isLoading.collectAsState()
     val isSuccessful by catalogScreenViewModel.isSuccesful.collectAsState()

@@ -16,30 +16,57 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.compose_magazin.presentation.cartScreen.CartScreen
 import com.example.compose_magazin.presentation.catalogScreen.CatalogScreen
+import com.example.compose_magazin.presentation.catalogScreen.CatalogScreenViewModel
+import com.example.compose_magazin.presentation.productCard.ProductCardsViewModel
 import com.example.compose_magazin.presentation.settingsScreen.SettingsScreen
 import com.example.compose_magazin.presentation.uiComponents.CartBadgedBox
 
 @Composable
 fun NavigationComponent(
     navController: NavHostController,
-    scaffoldViewModel: ScaffoldViewModel
+    scaffoldViewModel: ScaffoldViewModel,
 ) {
-    NavHost(navController = navController, startDestination = "catalog") {
-        composable("catalog") {
+    NavHost(
+        navController = navController,
+        startDestination = "catalog",
+        route = "parent"
+    ) {
+        composable("catalog") { backStackEntry ->
+
+            val parentEntry = remember(backStackEntry) {
+                navController.getBackStackEntry("parent")
+            }
+
             CatalogScreen(
                 navController = navController,
-                scaffoldViewModel = scaffoldViewModel
+                scaffoldViewModel = scaffoldViewModel,
+                catalogScreenViewModel = hiltViewModel(parentEntry),
+                productCardsViewModel = hiltViewModel(parentEntry)
             )
         }
-        composable("cart") { CartScreen(navController = navController) }
+        composable("cart") { backStackEntry ->
+
+            val parentEntry = remember(backStackEntry) {
+                navController.getBackStackEntry("parent")
+            }
+
+            val a: CatalogScreenViewModel = hiltViewModel(parentEntry)
+            val b: ProductCardsViewModel = hiltViewModel(parentEntry)
+            CartScreen(
+                navController = navController,
+                scaffoldViewModel = scaffoldViewModel,
+                catalogScreenViewModel = hiltViewModel(parentEntry),
+                productCardsViewModel = hiltViewModel(parentEntry)
+            )
+        }
         composable("settings") { SettingsScreen(navController = navController) }
     }
 }
