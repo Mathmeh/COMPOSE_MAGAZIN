@@ -32,6 +32,7 @@ fun CartScreen(
             val amount = productCardsViewModel.getProductAmountById(id) ?: 0
 
             CartProductItem(
+                productAmount = amount,
                 product = product,
                 onRemove = {
                     scaffoldViewModel.removeItem(amount)
@@ -41,9 +42,14 @@ fun CartScreen(
                 },
                 onIncrease = {
                     productCardsViewModel.addProductAmount(id, 1)
+                    scaffoldViewModel.addItem(1)
                 },
                 onDecrease = {
-                    productCardsViewModel.removeProductAmount(id, 1)
+                    productCardsViewModel.removeProductAmount(
+                        productId = id,
+                        changeAmountValue = 1
+                    )
+                    scaffoldViewModel.removeItem(1)
                 }
             )
         }

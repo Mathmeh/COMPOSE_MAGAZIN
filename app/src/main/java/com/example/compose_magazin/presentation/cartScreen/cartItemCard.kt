@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -21,6 +22,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,11 +35,15 @@ import com.example.compose_magazin.presentation.uiComponents.ProductImage
 
 @Composable
 fun CartProductItem(
+    productAmount: Int,
     product: PetProduct,
     onRemove: (PetProduct) -> Unit,
-    onDecrease: (Int) -> Unit,
-    onIncrease: (Int) -> Unit
+    onDecrease: () -> Unit,
+    onIncrease: () -> Unit
 ) {
+    val amount = remember {
+        mutableStateOf(productAmount)
+    }
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -91,14 +98,11 @@ fun CartProductItem(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                //                Text(
-//                    text = quantity.toString(),
-//                    style = MaterialTheme.typography.bodyLarge,
-//                    modifier = Modifier.padding(horizontal = 8.dp)
-//                )
-
                 IconButton(
-                    onClick = { onIncrease }
+                    onClick = {
+                        onIncrease()
+                        amount.value++
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
@@ -106,8 +110,16 @@ fun CartProductItem(
                         modifier = Modifier.size(24.dp)
                     )
                 }
+                Text(
+                    text = amount.value.toString(),
+                    fontSize = 32.sp,
+                    modifier = Modifier.fillMaxHeight()
+                )
                 IconButton(
-                    onClick = { onDecrease }
+                    onClick = {
+                        onDecrease()
+                        amount.value--
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.Default.Remove,
@@ -116,8 +128,6 @@ fun CartProductItem(
                     )
                 }
             }
-
-//            Spacer(modifier = Modifier.width(8.dp))
 
             IconButton(
                 onClick = { onRemove(product) },
