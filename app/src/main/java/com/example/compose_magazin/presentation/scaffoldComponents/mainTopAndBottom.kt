@@ -24,8 +24,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.compose_magazin.presentation.cartScreen.CartScreen
 import com.example.compose_magazin.presentation.catalogScreen.CatalogScreen
-import com.example.compose_magazin.presentation.catalogScreen.CatalogScreenViewModel
-import com.example.compose_magazin.presentation.productCard.ProductCardsViewModel
 import com.example.compose_magazin.presentation.settingsScreen.SettingsScreen
 import com.example.compose_magazin.presentation.uiComponents.CartBadgedBox
 
@@ -58,8 +56,6 @@ fun NavigationComponent(
                 navController.getBackStackEntry("parent")
             }
 
-            val a: CatalogScreenViewModel = hiltViewModel(parentEntry)
-            val b: ProductCardsViewModel = hiltViewModel(parentEntry)
             CartScreen(
                 navController = navController,
                 scaffoldViewModel = scaffoldViewModel,
