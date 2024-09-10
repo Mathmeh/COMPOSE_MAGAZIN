@@ -1,50 +1,38 @@
 package com.example.compose_magazin.presentation.aboutProductScreen
 
 import ErrorScreen
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
-import androidx.compose.material3.carousel.HorizontalUncontainedCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.rememberImagePainter
 import com.example.compose_magazin.domain.entity.PetProduct
-import com.example.compose_magazin.presentation.catalogScreen.HomeScreenContent
 import com.example.compose_magazin.presentation.catalogScreen.LoadingSpinner
-import com.example.compose_magazin.presentation.uiComponents.ProductImage
-
 
 @Composable
 fun AboutProductScreen(
     aboutProductViewModel: AboutProductViewModel = hiltViewModel()
 ) {
-
     val isLoading by aboutProductViewModel.isLoading.collectAsState()
     val isSuccessful by aboutProductViewModel.isSuccesful.collectAsState()
 
     if (isLoading) {
         LoadingSpinner()
     } else if (isSuccessful) {
-
         Text(text = "ID: ${aboutProductViewModel.petProduct.name}")
         PetInfoScreen(product = aboutProductViewModel.petProduct)
     } else {
@@ -54,7 +42,6 @@ fun AboutProductScreen(
         )
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

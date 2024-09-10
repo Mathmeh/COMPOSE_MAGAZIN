@@ -26,8 +26,7 @@ class AboutProductViewModel @Inject constructor(
     var errorMess: String = ""
     val id: Long = savedStateHandle["id"] ?: -1
 
-
-    var petProduct : PetProduct = PetProduct(
+    var petProduct: PetProduct = PetProduct(
         -1,
         null,
         null,

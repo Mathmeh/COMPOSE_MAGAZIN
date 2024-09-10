@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.compose_magazin.domain.entity.PetProduct
 import com.example.compose_magazin.presentation.scaffoldComponents.AboutProductData
-import com.example.compose_magazin.presentation.scaffoldComponents.Catalog
 import com.example.compose_magazin.presentation.scaffoldComponents.ScaffoldViewModel
 import com.example.compose_magazin.presentation.uiComponents.ChangeProductAmountButton
 import com.example.compose_magazin.presentation.uiComponents.ProductImage
@@ -52,7 +51,6 @@ fun ProductCard(
                         id = product.id
                     )
                 )
-                {  }
             }
     ) {
         Column(

@@ -1,6 +1,5 @@
 package com.example.compose_magazin.presentation.cartScreen
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height

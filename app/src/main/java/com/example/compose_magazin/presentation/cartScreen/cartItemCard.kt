@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.compose_magazin.domain.entity.PetProduct
 import com.example.compose_magazin.presentation.scaffoldComponents.AboutProductData
-import com.example.compose_magazin.presentation.scaffoldComponents.Catalog
 import com.example.compose_magazin.presentation.uiComponents.ProductImage
 
 @Composable
@@ -82,7 +81,8 @@ fun CartProductItem(
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.align(Alignment.CenterVertically
+                modifier = Modifier.align(
+                    Alignment.CenterVertically
                 )
             ) {
                 Text(
