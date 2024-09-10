@@ -1,5 +1,6 @@
 package com.example.compose_magazin.presentation.cartScreen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,11 +31,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.compose_magazin.domain.entity.PetProduct
+import com.example.compose_magazin.presentation.scaffoldComponents.AboutProductData
+import com.example.compose_magazin.presentation.scaffoldComponents.Catalog
 import com.example.compose_magazin.presentation.uiComponents.ProductImage
 
 @Composable
 fun CartProductItem(
+    navController: NavController,
     productAmount: Int,
     product: PetProduct,
     onRemove: (PetProduct) -> Unit,
@@ -46,7 +51,14 @@ fun CartProductItem(
     }
     Card(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+                navController.navigate(
+                    AboutProductData(
+                        id = product.id
+                    )
+                )
+            },
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Row(

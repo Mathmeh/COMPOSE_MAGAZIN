@@ -1,5 +1,6 @@
 package com.example.compose_magazin.presentation.productCard
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,13 +22,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.compose_magazin.domain.entity.PetProduct
+import com.example.compose_magazin.presentation.scaffoldComponents.AboutProductData
+import com.example.compose_magazin.presentation.scaffoldComponents.Catalog
 import com.example.compose_magazin.presentation.scaffoldComponents.ScaffoldViewModel
 import com.example.compose_magazin.presentation.uiComponents.ChangeProductAmountButton
 import com.example.compose_magazin.presentation.uiComponents.ProductImage
 
 @Composable
 fun ProductCard(
+    navController: NavHostController,
     product: PetProduct,
     productCardsViewModel: ProductCardsViewModel,
     scaffoldViewModel: ScaffoldViewModel,
@@ -41,6 +46,14 @@ fun ProductCard(
         modifier = modifier
             .padding(8.dp)
             .fillMaxWidth()
+            .clickable {
+                navController.navigate(
+                    AboutProductData(
+                        id = product.id
+                    )
+                )
+                {  }
+            }
     ) {
         Column(
             modifier = Modifier

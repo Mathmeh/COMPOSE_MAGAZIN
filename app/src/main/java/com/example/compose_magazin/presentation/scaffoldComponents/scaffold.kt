@@ -7,6 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.compose_magazin.presentation.scaffoldComponents.NavigationBar
+import com.example.compose_magazin.presentation.scaffoldComponents.NavigationComponent
+import com.example.compose_magazin.presentation.scaffoldComponents.TopBar
 
 @Composable
 fun MainScaffold(

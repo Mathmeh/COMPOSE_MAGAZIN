@@ -58,6 +58,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.material3)
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.logging.interceptor)
     implementation(libs.coil.compose)

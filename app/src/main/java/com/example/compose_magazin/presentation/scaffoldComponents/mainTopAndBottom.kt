@@ -22,6 +22,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
+import com.example.compose_magazin.presentation.aboutProductScreen.AboutProductScreen
 import com.example.compose_magazin.presentation.cartScreen.CartScreen
 import com.example.compose_magazin.presentation.catalogScreen.CatalogScreen
 import com.example.compose_magazin.presentation.settingsScreen.SettingsScreen
@@ -34,13 +36,13 @@ fun NavigationComponent(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "catalog",
-        route = "parent"
+        startDestination = Catalog,
+        route = Parent ::class
     ) {
-        composable("catalog") { backStackEntry ->
+        composable<Catalog> { backStackEntry ->
 
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry("parent")
+                navController.getBackStackEntry(Parent)
             }
 
             CatalogScreen(
@@ -50,12 +52,11 @@ fun NavigationComponent(
                 productCardsViewModel = hiltViewModel(parentEntry)
             )
         }
-        composable("cart") { backStackEntry ->
+        composable<Cart> { backStackEntry ->
 
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry("parent")
+                navController.getBackStackEntry(Parent)
             }
-
             CartScreen(
                 navController = navController,
                 scaffoldViewModel = scaffoldViewModel,
@@ -63,7 +64,11 @@ fun NavigationComponent(
                 productCardsViewModel = hiltViewModel(parentEntry)
             )
         }
-        composable("settings") { SettingsScreen(navController = navController) }
+        composable<Settings> { SettingsScreen(navController = navController) }
+        composable<AboutProductData> { backStackEntry ->
+            val aboutProductData = backStackEntry.toRoute<AboutProductData>()
+            AboutProductScreen()
+        }
     }
 }
 
@@ -75,9 +80,9 @@ fun NavigationBar(
 ) {
     var selectedItem by remember { mutableStateOf(0) }
     val items = listOf(
-        NavigationBarItemData("Catalog", "catalog", Icons.Default.Menu),
-        NavigationBarItemData("Cart", "cart", Icons.Default.ShoppingCart),
-        NavigationBarItemData("Settings", "settings", Icons.Default.Settings)
+        NavigationBarItemData("Catalog", Catalog, Icons.Default.Menu),
+        NavigationBarItemData("Cart", Cart, Icons.Default.ShoppingCart),
+        NavigationBarItemData("Settings", Settings, Icons.Default.Settings)
     )
 
     androidx.compose.material3.NavigationBar {
@@ -99,11 +104,7 @@ fun NavigationBar(
                 onClick = {
                     selectedItem = index
                     navController.navigate(item.route) {
-                        popUpTo(navController.graph.startDestinationId) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
+                        popUpTo(item.route)
                     }
                 }
             )
@@ -122,4 +123,4 @@ fun TopBar() {
     )
 }
 
-data class NavigationBarItemData(val label: String, val route: String, val icon: ImageVector)
+data class NavigationBarItemData(val label: String, val route: Any, val icon: ImageVector)

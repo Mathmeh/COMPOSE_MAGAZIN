@@ -58,7 +58,8 @@ fun HomeScreenContent(
             ProductCard(
                 product = product,
                 scaffoldViewModel = scaffoldViewModel,
-                productCardsViewModel = productCardsViewModel
+                productCardsViewModel = productCardsViewModel,
+                navController = navController
             )
         }
     }

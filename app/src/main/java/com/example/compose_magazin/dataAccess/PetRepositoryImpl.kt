@@ -14,4 +14,9 @@ class PetRepositoryImpl
         val pets = RetrofitClient.apiClient.getAllPetsByStatus("available")
         return pets.map { petProductDataToPetProduct(it) }
     }
+
+    override suspend fun getPetById(id: Long): PetProduct {
+        val pet = RetrofitClient.apiClient.getPetById(id)
+        return petProductDataToPetProduct(pet)
+    }
 }

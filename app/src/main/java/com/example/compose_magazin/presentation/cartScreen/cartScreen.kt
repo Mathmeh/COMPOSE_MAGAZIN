@@ -1,6 +1,9 @@
 package com.example.compose_magazin.presentation.cartScreen
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -32,6 +35,7 @@ fun CartScreen(
             val amount = productCardsViewModel.getProductAmountById(id) ?: 0
 
             CartProductItem(
+                navController = navController,
                 productAmount = amount,
                 product = product,
                 onRemove = {
@@ -52,6 +56,7 @@ fun CartScreen(
                     scaffoldViewModel.removeItem(1)
                 }
             )
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }
