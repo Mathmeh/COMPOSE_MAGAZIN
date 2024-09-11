@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class PetRepositoryImpl
 @Inject constructor() : PetRepository {
     override suspend fun getAvailablePets(): List<PetProduct> {
-        val pets = RetrofitClient.apiClient.getAllPetsByStatus("sold")
+        val pets = RetrofitClient.apiClient.getAllPetsByStatus("available")
         return pets.map { petProductDataToPetProduct(it) }
     }
 
