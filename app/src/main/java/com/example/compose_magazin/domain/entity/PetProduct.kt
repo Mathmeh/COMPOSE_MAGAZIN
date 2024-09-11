@@ -5,6 +5,6 @@ data class PetProduct(
     val name: String?,
     val category: PetCategory?,
     val tags: List<PetTag>?,
-    val photoUrls: List<String>?,
+    val photoUrls: List<String?>?,
     val status: String?
 )
