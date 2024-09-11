@@ -1,7 +1,7 @@
-package com.example.compose_magazin.dataAccess
+package com.example.compose_magazin.data
 
-import com.example.compose_magazin.dataAccess.api.RetrofitClient
-import com.example.compose_magazin.dataAccess.mappers.petProductDataToPetProduct
+import com.example.compose_magazin.data.api.RetrofitClient
+import com.example.compose_magazin.data.mappers.petProductDataToPetProduct
 import com.example.compose_magazin.domain.entity.PetProduct
 import com.example.compose_magazin.domain.PetRepository
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.example.compose_magazin.presentation.scaffoldComponents
+package com.example.compose_magazin.presentation.scaffold
 
 import android.annotation.SuppressLint
 import androidx.compose.material.icons.Icons
@@ -22,10 +22,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.compose_magazin.presentation.cartScreen.CartScreen
-import com.example.compose_magazin.presentation.catalogScreen.CatalogScreen
-import com.example.compose_magazin.presentation.settingsScreen.SettingsScreen
-import com.example.compose_magazin.presentation.uiComponents.CartBadgedBox
+import com.example.compose_magazin.presentation.cart.CartScreen
+import com.example.compose_magazin.presentation.catalog.CatalogScreen
+import com.example.compose_magazin.presentation.settings.SettingsScreen
+import com.example.compose_magazin.presentation.components.CartBadgedBox
 
 @Composable
 fun NavigationComponent(

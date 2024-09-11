@@ -1,4 +1,4 @@
-package com.example.compose_magazin.presentation.cartScreen
+package com.example.compose_magazin.presentation.cart
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -7,9 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.compose_magazin.presentation.catalogScreen.CatalogScreenViewModel
+import com.example.compose_magazin.presentation.catalog.CatalogScreenViewModel
 import com.example.compose_magazin.presentation.productCard.ProductCardsViewModel
-import com.example.compose_magazin.presentation.scaffoldComponents.ScaffoldViewModel
+import com.example.compose_magazin.presentation.scaffold.ScaffoldViewModel
 
 @Composable
 fun CartScreen(

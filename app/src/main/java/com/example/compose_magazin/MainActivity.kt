@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.example.compose_magazin.presentation.scaffoldComponents.MainScaffold
+import com.example.compose_magazin.presentation.scaffold.MainScaffold
 import com.example.compose_magazin.ui.theme.ComposeMagazinTheme
 import dagger.hilt.android.AndroidEntryPoint
 

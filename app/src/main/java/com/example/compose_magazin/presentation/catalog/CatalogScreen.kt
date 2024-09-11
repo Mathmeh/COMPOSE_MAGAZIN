@@ -1,4 +1,4 @@
-package com.example.compose_magazin.presentation.catalogScreen
+package com.example.compose_magazin.presentation.catalog
 
 import ErrorScreen
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -14,7 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.compose_magazin.presentation.productCard.ProductCardsViewModel
-import com.example.compose_magazin.presentation.scaffoldComponents.ScaffoldViewModel
+import com.example.compose_magazin.presentation.scaffold.ScaffoldViewModel
 
 @Composable
 fun CatalogScreen(

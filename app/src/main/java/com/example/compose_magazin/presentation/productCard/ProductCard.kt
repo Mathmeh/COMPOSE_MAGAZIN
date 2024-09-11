@@ -22,9 +22,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose_magazin.domain.entity.PetProduct
-import com.example.compose_magazin.presentation.scaffoldComponents.ScaffoldViewModel
-import com.example.compose_magazin.presentation.uiComponents.ChangeProductAmountButton
-import com.example.compose_magazin.presentation.uiComponents.ProductImage
+import com.example.compose_magazin.presentation.scaffold.ScaffoldViewModel
+import com.example.compose_magazin.presentation.components.ChangeProductAmountButton
+import com.example.compose_magazin.presentation.components.ProductImage
 
 @Composable
 fun ProductCard(

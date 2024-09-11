@@ -1,4 +1,4 @@
-package com.example.compose_magazin.presentation.uiComponents
+package com.example.compose_magazin.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues

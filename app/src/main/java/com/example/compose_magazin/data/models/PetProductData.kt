@@ -1,4 +1,4 @@
-package com.example.compose_magazin.dataAccess.models
+package com.example.compose_magazin.data.models
 
 import kotlinx.serialization.Serializable
 

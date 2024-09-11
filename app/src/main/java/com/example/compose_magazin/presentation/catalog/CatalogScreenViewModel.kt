@@ -1,4 +1,4 @@
-package com.example.compose_magazin.presentation.catalogScreen
+package com.example.compose_magazin.presentation.catalog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

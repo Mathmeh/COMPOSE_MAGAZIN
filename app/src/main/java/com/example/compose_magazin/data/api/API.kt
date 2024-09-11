@@ -1,6 +1,6 @@
-package com.example.compose_magazin.dataAccess.api
+package com.example.compose_magazin.data.api
 
-import com.example.compose_magazin.dataAccess.models.PetProductData
+import com.example.compose_magazin.data.models.PetProductData
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -1,4 +1,4 @@
-package com.example.compose_magazin.presentation.scaffoldComponents
+package com.example.compose_magazin.presentation.scaffold
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
