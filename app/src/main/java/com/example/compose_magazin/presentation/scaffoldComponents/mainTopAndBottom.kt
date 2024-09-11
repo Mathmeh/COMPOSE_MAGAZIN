@@ -22,7 +22,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.toRoute
 import com.example.compose_magazin.presentation.aboutProductScreen.AboutProductScreen
 import com.example.compose_magazin.presentation.cartScreen.CartScreen
 import com.example.compose_magazin.presentation.catalogScreen.CatalogScreen
@@ -44,7 +43,6 @@ fun NavigationComponent(
             val parentEntry = remember(backStackEntry) {
                 navController.getBackStackEntry(Parent)
             }
-
             CatalogScreen(
                 navController = navController,
                 scaffoldViewModel = scaffoldViewModel,
@@ -66,8 +64,15 @@ fun NavigationComponent(
         }
         composable<Settings> { SettingsScreen(navController = navController) }
         composable<AboutProductData> { backStackEntry ->
-            val aboutProductData = backStackEntry.toRoute<AboutProductData>()
-            AboutProductScreen()
+
+            val parentEntry = remember(backStackEntry) {
+                navController.getBackStackEntry(Parent)
+            }
+            AboutProductScreen(
+                navController = navController,
+                scaffoldViewModel = scaffoldViewModel,
+                productCardsViewModel = hiltViewModel(parentEntry)
+            )
         }
     }
 }
