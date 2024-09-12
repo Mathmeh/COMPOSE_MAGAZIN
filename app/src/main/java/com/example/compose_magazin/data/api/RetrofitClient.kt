@@ -20,7 +20,7 @@ object RetrofitClient {
         .build()
 
     @OptIn(ExperimentalSerializationApi::class)
-    val petProductApiClient: PetProductApi by lazy {
+    val petsProductApiClient: PetsProductApi by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
@@ -30,6 +30,6 @@ object RetrofitClient {
             )
             .build()
 
-        return@lazy retrofit.create(PetProductApi::class.java)
+        return@lazy retrofit.create(PetsProductApi::class.java)
     }
 }

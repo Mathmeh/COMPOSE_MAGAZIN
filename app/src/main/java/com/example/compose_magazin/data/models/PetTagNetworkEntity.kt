@@ -1,9 +1,9 @@
-package com.example.compose_magazin.dataAccess.models
+package com.example.compose_magazin.data.models
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PetTagData(
+data class PetTagNetworkEntity(
     val id: Long,
     val name: String?
 )
