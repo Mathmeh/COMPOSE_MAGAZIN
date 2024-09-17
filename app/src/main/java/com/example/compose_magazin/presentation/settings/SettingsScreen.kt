@@ -1,4 +1,4 @@
-package com.example.compose_magazin.presentation.settingsScreen
+package com.example.compose_magazin.presentation.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
